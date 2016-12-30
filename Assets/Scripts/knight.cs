@@ -7,8 +7,8 @@ public class knight : MonoBehaviour {
 		int pos = BoardManager1.pos;
 		int i, j, l=0;
 		i = (pos / 10)-1;
-		j = pos % 10;
-
+		j = (pos % 10)-1;
+		Debug.Log (i + "   " + j);
 		if (BoardManager1.player == "white") 
 		{
 			if ((i + 2) < 8 && (j - 1) >= 0) {
@@ -52,6 +52,7 @@ public class knight : MonoBehaviour {
 			if ((i - 2) >= 0 && (j + 1) < 8) {
 				if (BoardManager1.PiecePos [i - 2, j + 1] == null || BoardManager1.PiecePos [i - 2, j + 1].transform.tag != "white") {
 					BoardManager1.possibleMoves [l] = pos - 19;
+					//Debug.Log ("qqqqqqqqqqqqqqqqqqq");
 					l++;
 				}
 			}
@@ -114,7 +115,13 @@ public class knight : MonoBehaviour {
 				}
 			}
 		}
-		if (BoardManager1.firstMove == true)
-			BoardManager1.firstMove = false;
+		if (BoardManager1.whitefirstMove == true)
+			BoardManager1.whitefirstMove = false;
+		if (BoardManager1.blackfirstMove == true)
+			BoardManager1.blackfirstMove = false;
+		Debug.Log ("****************");
+		for (int c = 0; c < l; c++)
+			Debug.Log (BoardManager1.possibleMoves [c]);
+		Debug.Log ("****************");
 	}
 }

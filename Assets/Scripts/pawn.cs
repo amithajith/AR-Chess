@@ -11,11 +11,11 @@ public class pawn : MonoBehaviour {
 
 		if (BoardManager1.player == "white") 
 		{
-			if (BoardManager1.firstMove == true) 
+			if (BoardManager1.whitefirstMove == true) 
 			{
 				BoardManager1.possibleMoves [0] = pos - 10;
 				BoardManager1.possibleMoves [1] = pos - 20;
-				BoardManager1.firstMove = false;
+				BoardManager1.whitefirstMove = false;
 			} 
 			else 
 			{
@@ -39,20 +39,25 @@ public class pawn : MonoBehaviour {
 		} 
 		else if(BoardManager1.player == "black")
 		{
-			if (BoardManager1.PiecePos [i + 1, j] == null) 
-			{
+			if (BoardManager1.blackfirstMove == true) {
 				BoardManager1.possibleMoves [0] = pos + 10;
+				BoardManager1.possibleMoves [1] = pos + 20;
+				BoardManager1.blackfirstMove = false;
 			}
-			if (j < 7) 
+			else 
 			{
-				if (BoardManager1.PiecePos [i + 1, j + 1] != null && BoardManager1.PiecePos [i + 1, j + 1].transform.tag != "black") {
-					BoardManager1.possibleMoves [1] = pos + 11;
+				if (BoardManager1.PiecePos [i + 1, j] == null) {
+					BoardManager1.possibleMoves [0] = pos + 10;
 				}
-			}
-			if (j > 0) 
-			{
-				if (BoardManager1.PiecePos [i + 1, j - 1] != null && BoardManager1.PiecePos [i + 1, j - 1].transform.tag != "black") {
-					BoardManager1.possibleMoves [2] = pos + 9;
+				if (j < 7) {
+					if (BoardManager1.PiecePos [i + 1, j + 1] != null && BoardManager1.PiecePos [i + 1, j + 1].transform.tag != "black") {
+						BoardManager1.possibleMoves [1] = pos + 11;
+					}
+				}
+				if (j > 0) {
+					if (BoardManager1.PiecePos [i + 1, j - 1] != null && BoardManager1.PiecePos [i + 1, j - 1].transform.tag != "black") {
+						BoardManager1.possibleMoves [2] = pos + 9;
+					}
 				}
 			}
 		}

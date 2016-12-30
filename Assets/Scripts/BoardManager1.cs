@@ -26,7 +26,7 @@ public class BoardManager1 : MonoBehaviour {
 	public bool pieceSelected = false;
 	public int index = 0;
 	public int l,m;
-	public static bool firstMove = true;
+	public static bool whitefirstMove = true,blackfirstMove = true;
 	public static int pos,prevpos;
 	Vector3 temp;
 	Transform tr;
