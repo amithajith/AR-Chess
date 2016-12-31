@@ -7,15 +7,13 @@ public class bishop : MonoBehaviour {
 		int pos = BoardManager1.pos;
 		int i, j, l=0,m=1,n=1,o=1,p=1;
 		i = (pos / 10)-1;
-		j = pos % 10;
-		if (BoardManager1.player == "white") 
-		{
-			if (i < 8 && j < 8) 
-			{
+		j = (pos % 10)-1;
+		if (BoardManager1.player == "white") {
 				for (int k = i + 1, h = j + 1; k < 8 && h < 8; k++, h++) {
-					if (BoardManager1.PiecePos [k+1, h] != null) {
-						if (BoardManager1.PiecePos [k+1, h].tag == "black") {
+					if (BoardManager1.PiecePos [k, h] != null) {
+						if (BoardManager1.PiecePos [k, h].tag == "black") {
 							BoardManager1.possibleMoves [l] = pos + (m * 11);
+							l++;
 						}
 						break;
 					} else {
@@ -27,9 +25,10 @@ public class bishop : MonoBehaviour {
 
 
 				for (int k = i + 1, h = j - 1; k < 8 && h >= 0; k++, h--) {
-					if (BoardManager1.PiecePos [k+1, h] != null) {
-						if (BoardManager1.PiecePos [k+1, h].tag == "black") {
+					if (BoardManager1.PiecePos [k, h] != null) {
+						if (BoardManager1.PiecePos [k, h].tag == "black") {
 							BoardManager1.possibleMoves [l] = pos + (n * 9);
+							l++;
 						}
 						break;
 					} else {
@@ -38,40 +37,46 @@ public class bishop : MonoBehaviour {
 						l++;
 					}
 				}
-			}
-			if(i > 0 && j < 8)
-			for (int k = i - 1, h = j + 1; k > 0 && h < 8; k--, h++) {
-				if (BoardManager1.PiecePos [k+1, h] != null) {
-					if (BoardManager1.PiecePos [k+1, h].tag == "black") {
+				
+				for (int k = i - 1, h = j + 1; k >= 0 && h < 8; k--, h++) {
+					if (BoardManager1.PiecePos [k, h] != null) {
+						if (BoardManager1.PiecePos [k, h].tag == "black") {
+							BoardManager1.possibleMoves [l] = pos - (o * 9);
+							l++;
+						}
+						break;
+					} else {
 						BoardManager1.possibleMoves [l] = pos - (o * 9);
+						o++;
+						l++;
 					}
-					break;
-				} else {
-					BoardManager1.possibleMoves [l] = pos - (o * 9);
-					o++;
-					l++;
 				}
-			}
 
 
-			for (int k = i - 1, h = j - 1; k > 0 && h >= 0; k--, h--) {
-				if (BoardManager1.PiecePos [k+1, h] != null) {
-					if (BoardManager1.PiecePos [k+1, h].tag == "black") {
+				for (int k = i - 1, h = j - 1; k >= 0 && h >= 0; k--, h--) {
+					if (BoardManager1.PiecePos [k, h] != null) {
+						if (BoardManager1.PiecePos [k, h].tag == "black") {
+							BoardManager1.possibleMoves [l] = pos - (p * 11);
+							l++;
+						}
+						break;
+					} else {
 						BoardManager1.possibleMoves [l] = pos - (p * 11);
+						p++;
+						l++;
 					}
-					break;
-				} else {
-					BoardManager1.possibleMoves [l] = pos - (p * 11);
-					p++;
-					l++;
 				}
-			}
-		} else 
+			m = 1;
+			n = 1;
+			o = 1;
+			p = 1;
+		}else 
 		{
 			for (int k = i + 1, h = j + 1; k < 8 && h < 8; k++, h++) {
-				if (BoardManager1.PiecePos [k+1, h] != null) {
-					if (BoardManager1.PiecePos [k+1, h].tag == "white") {
+				if (BoardManager1.PiecePos [k, h] != null) {
+					if (BoardManager1.PiecePos [k, h].tag == "white") {
 						BoardManager1.possibleMoves [l] = pos + (m * 11);
+						l++;
 					}
 					break;
 				} else {
@@ -81,9 +86,10 @@ public class bishop : MonoBehaviour {
 				}
 			}
 			for (int k = i + 1, h = j - 1; k < 8 && h >= 0; k++, h--) {
-				if (BoardManager1.PiecePos [k+1, h] != null) {
-					if (BoardManager1.PiecePos [k+1, h].tag == "white") {
+				if (BoardManager1.PiecePos [k, h] != null) {
+					if (BoardManager1.PiecePos [k, h].tag == "white") {
 						BoardManager1.possibleMoves [l] = pos + (n * 9);
+						l++;
 					}
 					break;
 				} else {
@@ -92,10 +98,11 @@ public class bishop : MonoBehaviour {
 					l++;
 				}
 			}
-			for (int k = i - 1, h = j + 1; k > 0 && h < 8; k--, h++) {
-				if (BoardManager1.PiecePos [k+1, h] != null) {
-					if (BoardManager1.PiecePos [k+1, h].tag == "white") {
+			for (int k = i - 1, h = j + 1; k >=0 && h < 8; k--, h++) {
+				if (BoardManager1.PiecePos [k, h] != null) {
+					if (BoardManager1.PiecePos [k, h].tag == "white") {
 						BoardManager1.possibleMoves [l] = pos - (o * 9);
+						l++;
 					}
 					break;
 				} else {
@@ -104,10 +111,11 @@ public class bishop : MonoBehaviour {
 					l++;
 				}
 			}
-			for (int k = i - 1, h = j - 1; k > 0 && h >= 0; k--, h--) {
-				if (BoardManager1.PiecePos [k+1, h] != null) {
-					if (BoardManager1.PiecePos [k+1, h].tag == "white") {
+			for (int k = i - 1, h = j - 1; k >= 0 && h >= 0; k--, h--) {
+				if (BoardManager1.PiecePos [k, h] != null) {
+					if (BoardManager1.PiecePos [k, h].tag == "white") {
 						BoardManager1.possibleMoves [l] = pos - (p * 11);
+						l++;
 					}
 					break;
 				} else {
@@ -117,9 +125,12 @@ public class bishop : MonoBehaviour {
 				}
 			}
 		}
-		for (int c = 0; c < 14; c++) 
-		{
-			Debug.Log ("  " + BoardManager1.possibleMoves [c]);
+		Debug.Log ("****************");
+		for (int c = 0; c < l; c++) {
+			if (c == 4)
+				Debug.Log ("Possible 4 " + BoardManager1.possibleMoves [c]);
+			Debug.Log (BoardManager1.possibleMoves [c]);
 		}
+		Debug.Log ("****************");
 	}
 }

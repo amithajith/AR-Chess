@@ -14,7 +14,7 @@ public class BoardManager1 : MonoBehaviour {
 	public Transform TextIndicator;
 	[SerializeField] private float currentAmount = 0;
 	[SerializeField] private float speed;
-	private GameObject selectedPiece=null;
+	private GameObject selectedPiece=null,undo=null;
 	public GameObject prevObj=null;
 	public Material blackboard, whiteboard;
 	//public Material white;
@@ -74,11 +74,15 @@ public class BoardManager1 : MonoBehaviour {
 		Ray ray = cameraLeft.ScreenPointToRay (RadialProgressBar.transform.position);
 		hitTemp = hitInfo.collider;
 		hit = Physics.Raycast (ray, out hitInfo);
-
 				if (hitTemp != null || hitInfo.collider != null) 
 				{
-					if (hitTemp == hitInfo.collider && (hitInfo.collider.tag == "blackboard" || hitInfo.collider.tag == "whiteboard")) {
-						selectedPiece = hitInfo.collider.gameObject;
+			if (hitTemp == hitInfo.collider && (hitInfo.collider.tag == "blackboard" || hitInfo.collider.tag == "whiteboard" || hitInfo.collider.tag == "undo")) {
+				if (hitInfo.collider.tag == "undo") {
+					undo = hitInfo.collider.gameObject;
+					Debug.Log ("You hit the " + undo.transform.name);
+				} else {
+					selectedPiece = hitInfo.collider.gameObject;
+				}
 				int e = ((Int32.Parse (selectedPiece.transform.name)) / 10)-1;
 				int w = ((Int32.Parse (selectedPiece.transform.name)) % 10)-1;
 						if (currentAmount < 100) 

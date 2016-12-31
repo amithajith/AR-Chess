@@ -15,6 +15,7 @@ TagManager:
   - queen
   - bishop
   - knight
+  - undo
   layers:
   - Default
   - TransparentFX
